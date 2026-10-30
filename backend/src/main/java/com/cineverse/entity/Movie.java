@@ -38,6 +38,7 @@ public class Movie {
     private Integer imdbVotes;
     /** Optional curated collection, e.g. "CLASSICS". */
     private String collection;
+    @Column(name = "top250_rank")
     private Integer top250Rank;
     /** ADMIN (created in the console), IMPORT (catalog migration) or DEMO (fictional launch data). */
     private String catalogSource = "ADMIN";
