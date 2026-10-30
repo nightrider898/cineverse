@@ -1,0 +1,1894 @@
+{
+  "info": {
+    "_postman_id": "35efd00c-2208-4ddd-b5ff-4a60d19d8602",
+    "name": "CineVerse API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "End-to-end requests for the CineVerse Spring Boot API. Run folders top to bottom: Auth -> Movies -> Shows -> Seats -> Bookings -> Payments. Dev profile, mock payments."
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/v1"
+    },
+    {
+      "key": "email",
+      "value": "demo@cineverse.com"
+    },
+    {
+      "key": "password",
+      "value": "Demo@12345"
+    },
+    {
+      "key": "adminEmail",
+      "value": "admin@cineverse.com"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "city",
+      "value": "hyderabad"
+    },
+    {
+      "key": "movieId",
+      "value": "1"
+    },
+    {
+      "key": "showId",
+      "value": ""
+    },
+    {
+      "key": "lockId",
+      "value": ""
+    },
+    {
+      "key": "bookingId",
+      "value": ""
+    },
+    {
+      "key": "paymentId",
+      "value": ""
+    },
+    {
+      "key": "qrToken",
+      "value": ""
+    },
+    {
+      "key": "eventId",
+      "value": "1"
+    },
+    {
+      "key": "sessionId",
+      "value": ""
+    },
+    {
+      "key": "categoryId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Postman User\",\n  \"email\": \"postman-{{$timestamp}}@example.com\",\n  \"password\": \"Secret123\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('accessToken', d.accessToken);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.collectionVariables.set('refreshToken', d.refreshToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login (customer)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('accessToken', d.accessToken);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.collectionVariables.set('refreshToken', d.refreshToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Refresh (rotates token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('accessToken', d.accessToken);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.collectionVariables.set('refreshToken', d.refreshToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Forgot password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Change password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"{{password}}\",\n  \"newPassword\": \"{{password}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cities & Meta",
+      "item": [
+        {
+          "name": "Cities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cities"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Nearest city",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cities/nearest?lat=17.44&lng=78.35",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cities",
+                "nearest"
+              ],
+              "query": [
+                {
+                  "key": "lat",
+                  "value": "17.44"
+                },
+                {
+                  "key": "lng",
+                  "value": "78.35"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Genres",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/meta/genres",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "meta",
+                "genres"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Config",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/meta/config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "meta",
+                "config"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Offers in city",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/offers?city={{city}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "offers"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "{{city}}"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Food menu",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/food?cinemaId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "food"
+              ],
+              "query": [
+                {
+                  "key": "cinemaId",
+                  "value": "1"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Movies & Search",
+      "item": [
+        {
+          "name": "Home rails",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movies/home?city={{city}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "movies",
+                "home"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "{{city}}"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "List with filters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movies?city={{city}}&language=Telugu&genre=action&sort=rating,desc&page=0&size=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "movies"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "{{city}}"
+                },
+                {
+                  "key": "language",
+                  "value": "Telugu"
+                },
+                {
+                  "key": "genre",
+                  "value": "action"
+                },
+                {
+                  "key": "sort",
+                  "value": "rating,desc"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "20"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Movie detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movies/{{movieId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "movies",
+                "{{movieId}}"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Showtimes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/movies/{{movieId}}/showtimes?city={{city}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "movies",
+                "{{movieId}}",
+                "showtimes"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "{{city}}"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d.cinemas.length) pm.collectionVariables.set('showId', d.cinemas[0].shows[0].showId);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reviews",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reviews/movie/{{movieId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reviews",
+                "movie",
+                "{{movieId}}"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search?q=neon&city={{city}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "neon"
+                },
+                {
+                  "key": "city",
+                  "value": "{{city}}"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Search suggestions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/search/suggestions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                "suggestions"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cinemas",
+      "item": [
+        {
+          "name": "Cinemas in city",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cinemas?city={{city}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cinemas"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "{{city}}"
+                }
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Cinema detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cinemas/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cinemas",
+                "1"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Cinema showtimes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cinemas/1/showtimes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cinemas",
+                "1",
+                "showtimes"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shows & Seats",
+      "item": [
+        {
+          "name": "Show with seat map",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/shows/{{showId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shows",
+                "{{showId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Seat availability",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/shows/{{showId}}/seats",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shows",
+                "{{showId}}",
+                "seats"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Lock seats",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/shows/{{showId}}/seat-lock",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shows",
+                "{{showId}}",
+                "seat-lock"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"seatIds\": [\n    \"E5\",\n    \"E6\"\n  ]\n}"
+            },
+            "description": "Returns 409 SEAT_LOCKED / SEAT_ALREADY_BOOKED if another customer holds or bought a seat."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('lockId', d.lockId);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Release lock",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/shows/{{showId}}/seat-lock/{{lockId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shows",
+                "{{showId}}",
+                "seat-lock",
+                "{{lockId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create booking from lock",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lockId\": \"{{lockId}}\",\n  \"food\": [\n    {\n      \"foodItemId\": 1,\n      \"quantity\": 1\n    }\n  ]\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('bookingId', d.id);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update food",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{{bookingId}}/food",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{{bookingId}}",
+                "food"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"food\": [\n    {\n      \"foodItemId\": 1,\n      \"quantity\": 2\n    },\n    {\n      \"foodItemId\": 6,\n      \"quantity\": 2\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Apply coupon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/coupons/apply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "coupons",
+                "apply"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"couponCode\": \"WELCOME100\",\n  \"bookingId\": \"{{bookingId}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Remove coupon",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{{bookingId}}/coupon",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{{bookingId}}",
+                "coupon"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get booking",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{{bookingId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d.ticket) pm.collectionVariables.set('qrToken', d.ticket.qrToken);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "My bookings (upcoming)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings?tab=upcoming",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "tab",
+                  "value": "upcoming"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancel booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/{{bookingId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "{{bookingId}}",
+                "cancel"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Plans changed\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Event detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/events/{{eventId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events",
+                "{{eventId}}"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d.sessions.length) { pm.collectionVariables.set('sessionId', d.sessions[0].id); pm.collectionVariables.set('categoryId', d.sessions[0].categories[0].id); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Book event tickets",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/event",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "event"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"tickets\": [\n    {\n      \"categoryId\": \"{{categoryId}}\",\n      \"quantity\": 2\n    }\n  ]\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('bookingId', d.id);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Payment methods",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payments/methods?bookingId={{bookingId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "methods"
+              ],
+              "query": [
+                {
+                  "key": "bookingId",
+                  "value": "{{bookingId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Initiate payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/initiate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "initiate"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": \"{{bookingId}}\",\n  \"method\": \"UPI\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('paymentId', d.paymentId);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mock gateway: succeed (deliver webhook twice)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dev/payments/{{paymentId}}/simulate?deliveries=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dev",
+                "payments",
+                "{{paymentId}}",
+                "simulate"
+              ],
+              "query": [
+                {
+                  "key": "deliveries",
+                  "value": "2"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"outcome\": \"SUCCESS\"\n}"
+            },
+            "description": "Dev only. Second delivery returns DUPLICATE: only one booking/ticket is created."
+          }
+        },
+        {
+          "name": "Payment status (checks gateway if unknown)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payments/{{paymentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "{{paymentId}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Pay at venue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/initiate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "initiate"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": \"{{bookingId}}\",\n  \"method\": \"PAY_AT_VENUE\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Razorpay verify (after Checkout)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/razorpay/verify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "razorpay",
+                "verify"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentId\": \"{{paymentId}}\",\n  \"razorpayOrderId\": \"order_x\",\n  \"razorpayPaymentId\": \"pay_x\",\n  \"razorpaySignature\": \"sig\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Engagement",
+      "item": [
+        {
+          "name": "Favorites",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/favorites",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "favorites"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add favorite",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/favorites",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "favorites"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetType\": \"MOVIE\",\n  \"targetId\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Watchlist",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/watchlist",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "watchlist"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add to watchlist",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/watchlist",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "watchlist"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"movieId\": 8,\n  \"remindMe\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Unread count",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/unread-count",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "unread-count"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Write review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reviews",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reviews"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"movieId\": 1,\n  \"rating\": 5,\n  \"title\": \"Loved it\",\n  \"body\": \"Great visuals.\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Staff",
+      "item": [
+        {
+          "name": "Login (staff)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"staff@cineverse.com\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('accessToken', d.accessToken);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Validate ticket QR",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tickets/validate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tickets",
+                "validate"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qrToken\": \"{{qrToken}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Lookup booking",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/staff/bookings/CV-2026-000100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "staff",
+                "bookings",
+                "CV-2026-000100"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Counter payment received",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/staff/bookings/CV-2026-000100/counter-payment",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "staff",
+                "bookings",
+                "CV-2026-000100",
+                "counter-payment"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"PAID\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Login (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"password\": \"{{password}}\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('accessToken', d.accessToken);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Analytics (30 days)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/analytics",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "analytics"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create movie",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/movies",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "movies"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Postman Premiere\",\n  \"synopsis\": \"A film created from Postman.\",\n  \"durationMin\": 125,\n  \"certificate\": \"UA\",\n  \"releaseDate\": \"2026-10-01\",\n  \"formats\": [\n    \"2D\",\n    \"IMAX\"\n  ],\n  \"status\": \"NOW_SHOWING\",\n  \"featured\": false,\n  \"active\": true,\n  \"languages\": [\n    \"Telugu\",\n    \"English\"\n  ],\n  \"genres\": [\n    \"Drama\"\n  ],\n  \"directors\": [\n    \"Test Director\"\n  ],\n  \"cast\": [\n    {\n      \"name\": \"Test Actor\",\n      \"character\": \"Lead\"\n    }\n  ]\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json().data;",
+                  "if (d) pm.collectionVariables.set('movieId', d.id);",
+                  "pm.test('success', () => pm.expect(pm.response.json().success).to.be.true);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create cinema",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/cinemas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "cinemas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman Multiplex\",\n  \"cityId\": 1,\n  \"locality\": \"Gachibowli\",\n  \"address\": \"1 API Road\",\n  \"facilities\": [\n    \"PARKING\"\n  ],\n  \"allowPayAtVenue\": true,\n  \"cancellationAllowed\": true,\n  \"active\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Create screen",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/screens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "screens"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cinemaId\": 1,\n  \"name\": \"Screen 9\",\n  \"screenType\": \"IMAX\",\n  \"formats\": [\n    \"2D\",\n    \"IMAX\"\n  ],\n  \"active\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Save seat layout",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/screens/1/layout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "screens",
+                "1",
+                "layout"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rows\": [\n    {\n      \"label\": \"A\",\n      \"seatType\": \"VIP\",\n      \"seatCount\": 8,\n      \"offset\": 2,\n      \"aisleAfter\": [\n        4\n      ],\n      \"disabledSeats\": []\n    },\n    {\n      \"label\": \"B\",\n      \"seatType\": \"GOLD\",\n      \"seatCount\": 12,\n      \"offset\": 0,\n      \"aisleAfter\": [\n        3,\n        9\n      ],\n      \"disabledSeats\": [\n        12\n      ]\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create show",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/shows",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "shows"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"movieId\": \"{{movieId}}\",\n  \"screenId\": 1,\n  \"date\": \"2026-12-01\",\n  \"startTime\": \"18:30\",\n  \"format\": \"IMAX\",\n  \"language\": \"Telugu\",\n  \"basePrice\": 300\n}"
+            }
+          }
+        },
+        {
+          "name": "Bookings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/bookings?status=CONFIRMED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "CONFIRMED"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/payments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "payments"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Refunds",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/refunds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "refunds"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Coupons",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/coupons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "coupons"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Audit log",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/audit-logs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "audit-logs"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

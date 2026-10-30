@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: ${TEST_DATABASE_URL:jdbc:postgresql://localhost:5432/cineverse_test}
+    username: ${TEST_DATABASE_USERNAME:cineverse}
+    password: ${TEST_DATABASE_PASSWORD:cineverse}
+  flyway:
+    locations: classpath:db/migration,classpath:db/demo
+    clean-disabled: false
+cineverse:
+  scheduling:
+    enabled: false
+  rate-limit:
+    enabled: false
+  jwt:
+    secret: test-secret-test-secret-test-secret-test-secret-0123456789
+  cookies:
+    secure: false
+  payments:
+    mock-enabled: true
+  qr:
+    secret: test-qr-secret
+  seed:
+    demo-data: false
+  media:
+    sync-on-startup: false
+    tmdb-api-key: ""
+  email:
+    provider: console
+    outbox-dir: target/email-outbox
+logging:
+  level:
+    com.cineverse: INFO
+    org.hibernate.SQL: WARN

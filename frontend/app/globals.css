@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@import "@fontsource-variable/sora";
+@import "@fontsource-variable/plus-jakarta-sans";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora Variable", "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #211a15;
+  --color-ink-soft: #51453d;
+  --color-muted: #776b62;
+  --color-line: #efe6de;
+  --color-canvas: #ffffff;
+  --color-mist: #fff8f2;
+  --color-lavender: #fff1e6;
+
+  --color-brand-50: #fff7ed;
+  --color-brand-100: #ffedd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fdba74;
+  --color-brand-400: #fb923c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+  --color-brand-800: #9a3412;
+  --color-brand-900: #7c2d12;
+  --color-brand-950: #431407;
+
+  --color-gold: #c9962b;
+  --color-gold-soft: #fbf3dd;
+  --color-held: #f59e0b;
+  --color-success: #12a150;
+  --color-danger: #dc3545;
+
+  --radius-card: 1.25rem;
+  --shadow-soft: 0 1px 2px rgb(33 26 21 / 0.04), 0 8px 24px -12px rgb(194 65 12 / 0.16);
+  --shadow-lift: 0 2px 6px rgb(33 26 21 / 0.06), 0 24px 48px -20px rgb(194 65 12 / 0.3);
+  --shadow-glow: 0 0 0 4px rgb(249 115 22 / 0.18), 0 10px 30px -10px rgb(234 88 12 / 0.45);
+
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-gradient: gradient-pan 12s ease infinite;
+  --animate-float: float 7s ease-in-out infinite;
+
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes gradient-pan {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  ::selection { background: var(--color-brand-200); color: var(--color-brand-950); }
+  :focus-visible { outline: 2px solid var(--color-brand-500); outline-offset: 2px; border-radius: 6px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+}
+
+@layer components {
+  .bg-brand-gradient { background-image: linear-gradient(120deg, #c2410c 0%, #f97316 48%, #fb923c 100%); }
+  .bg-brand-gradient-animated {
+    background-image: linear-gradient(120deg, #9a3412, #ea580c, #fb923c, #ea580c, #9a3412);
+    background-size: 300% 300%;
+    animation: var(--animate-gradient);
+  }
+  .text-brand-gradient {
+    background-image: linear-gradient(100deg, #c2410c 0%, #f97316 50%, #fb923c 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .glass {
+    background: rgb(255 255 255 / 0.72);
+    backdrop-filter: saturate(160%) blur(18px);
+    -webkit-backdrop-filter: saturate(160%) blur(18px);
+  }
+  .glass-dark {
+    background: rgb(67 20 7 / 0.45);
+    backdrop-filter: saturate(140%) blur(16px);
+    -webkit-backdrop-filter: saturate(140%) blur(16px);
+  }
+  .skeleton {
+    background: linear-gradient(90deg, #fff4e9 25%, #fce6d4 37%, #fff4e9 63%);
+    background-size: 400% 100%;
+    animation: var(--animate-shimmer);
+  }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .container-page { width: 100%; max-width: 1320px; margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 768px) { .container-page { padding-inline: 1.5rem; } }
+  @media (min-width: 1280px) { .container-page { padding-inline: 2rem; } }
+  .tabular { font-variant-numeric: tabular-nums; }
+}
+
+@media print {
+  header, nav, footer, .no-print, [data-sonner-toaster] { display: none !important; }
+  body { background: #fff; }
+  .ticket-print { box-shadow: none !important; break-inside: avoid; }
+}

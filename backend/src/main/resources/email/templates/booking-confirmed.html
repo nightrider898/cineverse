@@ -1,0 +1,67 @@
+<h1 class="h1" style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:28px;line-height:36px;color:#211A15;font-weight:800;">Booking confirmed! 🎉</h1>
+<p style="margin:0 0 18px 0;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#16A34A;font-weight:bold;">Payment successful · Order {{reference}}</p>
+
+<p style="margin:0 0 14px 0;">Hi {{firstName}},</p>
+<p style="margin:0 0 22px 0;">Thank you for booking with {{brandName}}! Your payment of <strong style="color:#211A15;">{{totalPaid}}</strong> was received and your tickets are confirmed. Show the QR code below at the entrance. Enjoy the show!</p>
+
+<!-- what & where -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #EFE6DE;border-radius:14px;margin:0 0 20px 0;">
+  <tr>
+    {{{posterCell}}}
+    <td valign="top" style="padding:18px 20px;">
+      <div style="font-size:20px;line-height:26px;font-weight:800;color:#211A15;margin:0 0 4px 0;">{{title}}</div>
+      <div style="font-size:13px;color:#EA580C;font-weight:bold;margin:0 0 12px 0;">{{subtitle}}</div>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-size:14px;line-height:21px;">
+        <tr><td style="color:#776B62;padding:3px 14px 3px 0;white-space:nowrap;">📅 When</td><td style="color:#211A15;font-weight:bold;padding:3px 0;">{{when}}</td></tr>
+        <tr><td style="color:#776B62;padding:3px 14px 3px 0;white-space:nowrap;">📍 Where</td><td style="color:#211A15;font-weight:bold;padding:3px 0;">{{venue}}<br><span style="font-weight:normal;color:#776B62;font-size:13px;">{{venueAddress}}</span></td></tr>
+        <tr><td style="color:#776B62;padding:3px 14px 3px 0;white-space:nowrap;">🎟️ {{seatsLabel}}</td><td style="color:#211A15;font-weight:bold;padding:3px 0;">{{seats}}</td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!-- QR -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#FFF7ED;border-radius:14px;margin:0 0 20px 0;">
+  <tr><td align="center" style="padding:22px 20px 18px 20px;">
+    <img src="cid:cv-qr" width="180" height="180" alt="Entry QR code for booking {{reference}}" style="display:block;border:0;width:180px;height:180px;background:#FFFFFF;border-radius:10px;">
+    <div style="font-family:'Courier New',monospace;font-size:15px;letter-spacing:2px;color:#211A15;font-weight:bold;margin-top:12px;">{{ticketCode}}</div>
+    <div style="font-size:12px;color:#776B62;margin-top:4px;">Scan at the entrance · one QR for all {{seatCount}} {{ticketWord}}</div>
+  </td></tr>
+</table>
+
+<!-- payment & order -->
+<p style="margin:0 0 10px 0;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#9A8A7E;font-weight:bold;">Order &amp; payment details</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #EFE6DE;border-radius:12px;margin:0 0 20px 0;">
+  <tr><td style="padding:14px 20px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:14px;line-height:22px;">
+      <tr><td style="color:#776B62;padding:4px 0;width:46%;">Order ID</td><td align="right" style="color:#211A15;font-weight:bold;padding:4px 0;font-family:'Courier New',monospace;">{{reference}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">Payment ID</td><td align="right" style="color:#211A15;font-weight:bold;padding:4px 0;font-family:'Courier New',monospace;word-break:break-all;">{{paymentId}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">Transaction ID</td><td align="right" style="color:#211A15;font-weight:bold;padding:4px 0;font-family:'Courier New',monospace;word-break:break-all;">{{transactionId}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">Paid via</td><td align="right" style="color:#211A15;font-weight:bold;padding:4px 0;">{{paidVia}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">Paid on</td><td align="right" style="color:#211A15;font-weight:bold;padding:4px 0;">{{paidAt}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">Status</td><td align="right" style="padding:4px 0;"><span style="display:inline-block;background:#DCFCE7;color:#166534;font-weight:bold;font-size:12px;padding:2px 10px;border-radius:999px;">PAID</span></td></tr>
+    </table>
+  </td></tr>
+</table>
+
+<!-- price breakdown -->
+<p style="margin:0 0 10px 0;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#9A8A7E;font-weight:bold;">Price breakdown</p>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #EFE6DE;border-radius:12px;margin:0 0 24px 0;">
+  <tr><td style="padding:14px 20px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:14px;line-height:22px;">
+      {{{priceRows}}}
+      <tr><td colspan="2" style="border-top:1px dashed #F3D9C4;padding-top:8px;"></td></tr>
+      <tr><td style="color:#211A15;font-weight:800;font-size:16px;padding:2px 0;">Total paid</td><td align="right" style="color:#211A15;font-weight:800;font-size:16px;padding:2px 0;">{{totalPaid}}</td></tr>
+    </table>
+  </td></tr>
+</table>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px 0;"><tr>
+  <td style="border-radius:999px;background:#EA580C;background-image:linear-gradient(90deg,#F97316,#EA580C);">
+    <a href="{{bookingUrl}}" style="display:inline-block;padding:14px 30px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">View ticket</a>
+  </td>
+</tr></table>
+
+<p style="margin:0 0 8px 0;font-size:13px;line-height:20px;color:#776B62;"><strong style="color:#51453D;">Good to know:</strong> please arrive 20 minutes early with a valid photo ID. {{cancellationNote}}</p>
+<p style="margin:16px 0 6px 0;">Thanks again, and enjoy the show!</p>
+<p style="margin:0 0 18px 0;font-weight:bold;color:#211A15;">Team {{brandName}}</p>

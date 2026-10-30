@@ -1,0 +1,57 @@
+[
+ {"city":"hyderabad","name":"AMB Cinemas","chain":"AMB Cinemas","area":"Gachibowli","address":"Sarath City Capital Mall, Gachibowli, Hyderabad","lat":17.4579,"lng":78.3637,"screens":7,"premium":true},
+ {"city":"hyderabad","name":"Prasads Multiplex","chain":"Prasads","area":"Khairatabad","address":"NTR Marg, near Necklace Road, Khairatabad, Hyderabad","lat":17.4116,"lng":78.4665,"screens":6,"premium":true},
+ {"city":"hyderabad","name":"PVR Inorbit Cyberabad","chain":"PVR INOX","area":"Madhapur","address":"Inorbit Mall, Hitech City, Madhapur, Hyderabad","lat":17.4344,"lng":78.3866,"screens":6,"premium":false},
+ {"city":"hyderabad","name":"PVR Nexus Hyderabad","chain":"PVR INOX","area":"Kukatpally","address":"Nexus Hyderabad Mall, KPHB, Kukatpally, Hyderabad","lat":17.4900,"lng":78.3920,"screens":5,"premium":false},
+ {"city":"hyderabad","name":"INOX GVK One","chain":"PVR INOX","area":"Banjara Hills","address":"GVK One Mall, Road No. 1, Banjara Hills, Hyderabad","lat":17.4192,"lng":78.4486,"screens":6,"premium":false},
+ {"city":"hyderabad","name":"Asian Allu Arjun Cinemas (AAA)","chain":"Asian Cinemas","area":"Ameerpet","address":"Ameerpet, Hyderabad","lat":17.4375,"lng":78.4482,"screens":3,"premium":false},
+ {"city":"hyderabad","name":"Sudarshan 35mm","chain":"Single screen","area":"RTC X Roads","address":"RTC X Roads, Chikkadpally, Hyderabad","lat":17.4062,"lng":78.4970,"screens":1,"premium":false},
+
+ {"city":"bengaluru","name":"PVR Orion Mall","chain":"PVR INOX","area":"Rajajinagar","address":"Orion Mall, Brigade Gateway, Rajajinagar, Bengaluru","lat":13.0110,"lng":77.5550,"screens":11,"premium":true},
+ {"city":"bengaluru","name":"PVR Phoenix Marketcity","chain":"PVR INOX","area":"Whitefield Road","address":"Phoenix Marketcity, Mahadevapura, Bengaluru","lat":12.9970,"lng":77.6960,"screens":8,"premium":false},
+ {"city":"bengaluru","name":"INOX Garuda Mall","chain":"PVR INOX","area":"Magrath Road","address":"Garuda Mall, Magrath Road, Bengaluru","lat":12.9700,"lng":77.6100,"screens":6,"premium":false},
+ {"city":"bengaluru","name":"Cinepolis Nexus Shantiniketan","chain":"Cinepolis","area":"Whitefield","address":"Nexus Shantiniketan, ITPL Main Road, Whitefield, Bengaluru","lat":12.9890,"lng":77.7280,"screens":7,"premium":false},
+ {"city":"bengaluru","name":"Urvashi Cinema","chain":"Single screen","area":"Lalbagh Road","address":"Lalbagh Road, Sudhama Nagar, Bengaluru","lat":12.9560,"lng":77.5870,"screens":1,"premium":false},
+
+ {"city":"chennai","name":"PVR Sathyam","chain":"PVR INOX","area":"Royapettah","address":"Thiru Vi Ka Road, Royapettah, Chennai","lat":13.0550,"lng":80.2580,"screens":6,"premium":true},
+ {"city":"chennai","name":"PVR Palazzo, Nexus Vijaya","chain":"PVR INOX","area":"Vadapalani","address":"Nexus Vijaya Mall, Arcot Road, Vadapalani, Chennai","lat":13.0500,"lng":80.2090,"screens":9,"premium":false},
+ {"city":"chennai","name":"INOX Phoenix Marketcity","chain":"PVR INOX","area":"Velachery","address":"Phoenix Marketcity, Velachery Main Road, Chennai","lat":12.9920,"lng":80.2170,"screens":11,"premium":false},
+ {"city":"chennai","name":"AGS Cinemas T. Nagar","chain":"AGS Cinemas","area":"T. Nagar","address":"GN Chetty Road, T. Nagar, Chennai","lat":13.0410,"lng":80.2400,"screens":4,"premium":false},
+ {"city":"chennai","name":"Rohini Silver Screens","chain":"Rohini","area":"Koyambedu","address":"Inner Ring Road, Koyambedu, Chennai","lat":13.0740,"lng":80.1950,"screens":5,"premium":false},
+
+ {"city":"delhi","name":"PVR Director's Cut, Ambience Mall","chain":"PVR INOX","area":"Vasant Kunj","address":"Ambience Mall, Nelson Mandela Marg, Vasant Kunj, New Delhi","lat":28.5410,"lng":77.1550,"screens":4,"premium":true},
+ {"city":"delhi","name":"PVR Select Citywalk","chain":"PVR INOX","area":"Saket","address":"Select Citywalk, Saket District Centre, New Delhi","lat":28.5290,"lng":77.2190,"screens":6,"premium":false},
+ {"city":"delhi","name":"PVR Plaza","chain":"PVR INOX","area":"Connaught Place","address":"H Block, Connaught Place, New Delhi","lat":28.6330,"lng":77.2190,"screens":1,"premium":false},
+ {"city":"delhi","name":"INOX Nehru Place","chain":"PVR INOX","area":"Nehru Place","address":"Eros Hotel complex, Nehru Place, New Delhi","lat":28.5490,"lng":77.2520,"screens":4,"premium":false},
+ {"city":"delhi","name":"Delite Cinema","chain":"Single screen","area":"Daryaganj","address":"Asaf Ali Road, Daryaganj, New Delhi","lat":28.6400,"lng":77.2360,"screens":1,"premium":false},
+
+ {"city":"mumbai","name":"PVR Phoenix Palladium","chain":"PVR INOX","area":"Lower Parel","address":"Phoenix Palladium, Senapati Bapat Marg, Lower Parel, Mumbai","lat":18.9940,"lng":72.8250,"screens":8,"premium":true},
+ {"city":"mumbai","name":"PVR ICON Infiniti Andheri","chain":"PVR INOX","area":"Andheri West","address":"Infiniti Mall, New Link Road, Andheri West, Mumbai","lat":19.1410,"lng":72.8310,"screens":6,"premium":false},
+ {"city":"mumbai","name":"INOX Nariman Point","chain":"PVR INOX","area":"Nariman Point","address":"CR2 Mall, Barrister Rajni Patel Marg, Nariman Point, Mumbai","lat":18.9260,"lng":72.8230,"screens":4,"premium":false},
+ {"city":"mumbai","name":"Gaiety Galaxy","chain":"Single screen","area":"Bandra West","address":"Hill Road, Bandra West, Mumbai","lat":19.0550,"lng":72.8380,"screens":3,"premium":false},
+ {"city":"mumbai","name":"Maratha Mandir","chain":"Single screen","area":"Mumbai Central","address":"Dr. A.L. Nair Road, Mumbai Central, Mumbai","lat":18.9690,"lng":72.8200,"screens":1,"premium":false},
+ {"city":"mumbai","name":"Cinepolis Viviana Thane","chain":"Cinepolis","area":"Thane West","address":"Viviana Mall, Eastern Express Highway, Thane West","lat":19.2080,"lng":72.9710,"screens":8,"premium":false},
+
+ {"city":"kolkata","name":"INOX South City","chain":"PVR INOX","area":"Jadavpur","address":"South City Mall, Prince Anwar Shah Road, Kolkata","lat":22.5010,"lng":88.3620,"screens":6,"premium":true},
+ {"city":"kolkata","name":"PVR Mani Square","chain":"PVR INOX","area":"Kankurgachi","address":"Mani Square Mall, EM Bypass, Kolkata","lat":22.5770,"lng":88.4010,"screens":5,"premium":false},
+ {"city":"kolkata","name":"INOX Quest Mall","chain":"PVR INOX","area":"Ballygunge","address":"Quest Mall, Syed Amir Ali Avenue, Kolkata","lat":22.5390,"lng":88.3650,"screens":4,"premium":false},
+ {"city":"kolkata","name":"Priya Cinema","chain":"Single screen","area":"Deshapriya Park","address":"Rash Behari Avenue, Deshapriya Park, Kolkata","lat":22.5180,"lng":88.3520,"screens":1,"premium":false},
+ {"city":"kolkata","name":"Nandan","chain":"Government","area":"Esplanade","address":"Nandan Complex, AJC Bose Road, Kolkata","lat":22.5450,"lng":88.3450,"screens":2,"premium":false},
+
+ {"city":"pune","name":"PVR Phoenix Marketcity Pune","chain":"PVR INOX","area":"Viman Nagar","address":"Phoenix Marketcity, Nagar Road, Viman Nagar, Pune","lat":18.5620,"lng":73.9170,"screens":8,"premium":true},
+ {"city":"pune","name":"INOX Bund Garden","chain":"PVR INOX","area":"Bund Garden","address":"Bund Garden Road, Pune","lat":18.5370,"lng":73.8840,"screens":4,"premium":false},
+ {"city":"pune","name":"City Pride Kothrud","chain":"City Pride","area":"Kothrud","address":"Paud Road, Kothrud, Pune","lat":18.5070,"lng":73.8140,"screens":5,"premium":false},
+ {"city":"pune","name":"Cinepolis Seasons Mall","chain":"Cinepolis","area":"Hadapsar","address":"Seasons Mall, Magarpatta, Hadapsar, Pune","lat":18.5190,"lng":73.9300,"screens":6,"premium":false},
+
+ {"city":"vijayawada","name":"PVR Ripples Mall","chain":"PVR INOX","area":"MG Road","address":"Ripples Mall, MG Road, Vijayawada","lat":16.5030,"lng":80.6420,"screens":5,"premium":true},
+ {"city":"vijayawada","name":"INOX LEPL Icon","chain":"PVR INOX","area":"Patamata","address":"LEPL Icon, Patamata, Vijayawada","lat":16.4950,"lng":80.6640,"screens":4,"premium":false},
+ {"city":"vijayawada","name":"Capital Cinemas Trendset Mall","chain":"Capital Cinemas","area":"Benz Circle","address":"Trendset Mall, Benz Circle, Vijayawada","lat":16.4990,"lng":80.6560,"screens":4,"premium":false},
+ {"city":"vijayawada","name":"Cinepolis PVP Square","chain":"Cinepolis","area":"Mogalrajapuram","address":"PVP Square Mall, Mogalrajapuram, Vijayawada","lat":16.5070,"lng":80.6480,"screens":4,"premium":false},
+ {"city":"vijayawada","name":"G3 Theatres Raj Yuvraj","chain":"G3 Theatres","area":"Gandhi Nagar","address":"Gandhi Nagar, Vijayawada","lat":16.5170,"lng":80.6260,"screens":2,"premium":false},
+
+ {"city":"visakhapatnam","name":"INOX CMR Central Maddilapalem","chain":"PVR INOX","area":"Maddilapalem","address":"CMR Central, Maddilapalem, Visakhapatnam","lat":17.7360,"lng":83.3190,"screens":5,"premium":true},
+ {"city":"visakhapatnam","name":"INOX Varun Beach","chain":"PVR INOX","area":"Beach Road","address":"Varun Beach, Beach Road, Visakhapatnam","lat":17.7130,"lng":83.3260,"screens":4,"premium":false},
+ {"city":"visakhapatnam","name":"AAA Cinemas Vizag","chain":"Asian Cinemas","area":"Kailasapuram","address":"Kailasapuram, Visakhapatnam","lat":17.7370,"lng":83.2860,"screens":3,"premium":false},
+ {"city":"visakhapatnam","name":"Sri Melody Theatre","chain":"Single screen","area":"Jagadamba Junction","address":"Jagadamba Junction, Visakhapatnam","lat":17.7120,"lng":83.3000,"screens":1,"premium":false},
+ {"city":"visakhapatnam","name":"Miraj Cinemas Bhupathi Surya Central","chain":"Miraj Cinemas","area":"Dondaparthy","address":"Dondaparthy, Visakhapatnam","lat":17.7290,"lng":83.2980,"screens":4,"premium":false}
+]

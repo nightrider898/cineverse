@@ -1,0 +1,28 @@
+<h1 class="h1" style="margin:0 0 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:26px;line-height:34px;color:#211A15;font-weight:800;">New sign-in to your account</h1>
+<p style="margin:0 0 18px 0;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#EA580C;font-weight:bold;">Security notification</p>
+
+<p style="margin:0 0 14px 0;">Hi {{firstName}},</p>
+<p style="margin:0 0 20px 0;">Welcome back! Your {{brandName}} account was just signed in to. Here are the details:</p>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #EFE6DE;border-radius:12px;margin:0 0 22px 0;">
+  <tr><td style="padding:16px 20px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:14px;line-height:22px;">
+      <tr><td style="color:#776B62;padding:4px 0;width:140px;">Account</td><td style="color:#211A15;font-weight:bold;padding:4px 0;">{{email}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">When</td><td style="color:#211A15;font-weight:bold;padding:4px 0;">{{when}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">Device</td><td style="color:#211A15;font-weight:bold;padding:4px 0;">{{device}}</td></tr>
+      <tr><td style="color:#776B62;padding:4px 0;">IP address</td><td style="color:#211A15;font-weight:bold;padding:4px 0;">{{ip}}</td></tr>
+    </table>
+  </td></tr>
+</table>
+
+<p style="margin:0 0 20px 0;">If this was you, there's nothing else to do. Enjoy the show!</p>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:12px;margin:0 0 24px 0;">
+  <tr><td style="padding:16px 20px;font-size:14px;line-height:21px;color:#7C2D12;">
+    <strong>Wasn't you?</strong> Reset your password right away. This signs you out of every device.
+    <br><a href="{{siteUrl}}/forgot-password" style="display:inline-block;margin-top:10px;color:#C2410C;font-weight:bold;">Reset my password →</a>
+  </td></tr>
+</table>
+
+<p style="margin:0 0 6px 0;">Stay safe,</p>
+<p style="margin:0 0 18px 0;font-weight:bold;color:#211A15;">Team {{brandName}}</p>

@@ -1,0 +1,176 @@
+spring:
+  config:
+    import: optional:file:../.env[.properties]
+  application:
+    name: cineverse
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/cineverse}
+    username: ${DATABASE_USERNAME:cineverse}
+    password: ${DATABASE_PASSWORD:cineverse}
+    hikari:
+      maximum-pool-size: ${DATABASE_POOL_SIZE:20}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+        jdbc.batch_size: 50
+        order_inserts: true
+        default_batch_fetch_size: 50
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+  mail:
+    host: ${EMAIL_HOST:localhost}
+    port: ${EMAIL_PORT:587}
+    username: ${EMAIL_USERNAME:}
+    password: ${EMAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  forward-headers-strategy: framework
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+  api-docs:
+    path: /v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  pattern:
+    level: "%5p [rid=%X{requestId:-} uid=%X{userId:-}]"
+
+cineverse:
+  app-name: ${APP_NAME:BookMyEvent}
+  frontend-url: ${FRONTEND_URL:http://localhost:3000}
+  timezone: Asia/Kolkata
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
+  jwt:
+    secret: ${JWT_SECRET:}
+    access-expiration: ${JWT_ACCESS_EXPIRATION:PT15M}
+    refresh-expiration: ${JWT_REFRESH_EXPIRATION:P14D}
+    issuer: cineverse
+  cookies:
+    secure: ${COOKIE_SECURE:true}
+    same-site: ${COOKIE_SAME_SITE:Lax}
+  seat-lock:
+    duration: ${SEAT_LOCK_DURATION:PT5M}
+    max-seats: 10
+    cleanup-interval-ms: 5000
+  event-hold:
+    duration: PT10M
+  pay-at-venue:
+    hold-duration: ${PAY_AT_VENUE_HOLD:PT2H}
+    cutoff-before-show: PT30M
+  pricing:
+    convenience-fee-per-ticket: ${CONVENIENCE_FEE_PER_TICKET:25}
+    convenience-fee-max: 200
+    tax-rate-on-fee: ${TAX_RATE_ON_FEE:0.18}
+    currency: INR
+  cancellation:
+    cutoff-minutes-before-show: ${CANCELLATION_CUTOFF_MINUTES:120}
+    refund-percent: 100
+    refund-convenience-fee: false
+  rate-limit:
+    enabled: true
+    auth-per-minute: 20
+    general-per-minute: 300
+  payments:
+    mock-enabled: ${PAYMENTS_MOCK_ENABLED:false}
+    stripe:
+      secret-key: ${STRIPE_SECRET_KEY:}
+      publishable-key: ${STRIPE_PUBLISHABLE_KEY:}
+      webhook-secret: ${STRIPE_WEBHOOK_SECRET:}
+      api-base: https://api.stripe.com
+    razorpay:
+      key-id: ${RAZORPAY_KEY_ID:}
+      key-secret: ${RAZORPAY_KEY_SECRET:}
+      webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+      api-base: https://api.razorpay.com
+    phonepe:
+      client-id: ${PHONEPE_CLIENT_ID:}
+      client-secret: ${PHONEPE_CLIENT_SECRET:}
+      client-version: ${PHONEPE_CLIENT_VERSION:1}
+      environment: ${PHONEPE_ENVIRONMENT:SANDBOX}
+      webhook-username: ${PHONEPE_WEBHOOK_USERNAME:}
+      webhook-password: ${PHONEPE_WEBHOOK_PASSWORD:}
+  email:
+    provider: ${EMAIL_PROVIDER:console}
+    from: ${EMAIL_FROM:BookMyEvent <no-reply@bookmyevent.local>}
+    login-alerts: ${EMAIL_LOGIN_ALERTS:true}
+    outbox-dir: ${EMAIL_OUTBOX_DIR:email-outbox}
+  media:
+    tmdb-api-key: ${TMDB_API_KEY:}
+    youtube-api-key: ${YOUTUBE_API_KEY:}
+    sync-on-startup: ${MEDIA_SYNC_ON_STARTUP:true}
+    resync-after: ${MEDIA_RESYNC_AFTER:P7D}
+  brand:
+    name: ${BRAND_NAME:BookMyEvent}
+    legal-name: ${BRAND_LEGAL_NAME:BookMyEvent Entertainment Pvt. Ltd.}
+    motto: ${BRAND_MOTTO:Every seat tells a story.}
+    support-email: ${BRAND_SUPPORT_EMAIL:support@bookmyevent.in}
+    support-phone: ${BRAND_SUPPORT_PHONE:+91 40 4000 1234}
+    address: ${BRAND_ADDRESS:Hitech City, Hyderabad, Telangana 500081}
+    instagram-url: ${BRAND_INSTAGRAM_URL:https://www.instagram.com/}
+    x-url: ${BRAND_X_URL:https://x.com/}
+    facebook-url: ${BRAND_FACEBOOK_URL:https://www.facebook.com/}
+    youtube-url: ${BRAND_YOUTUBE_URL:https://www.youtube.com/}
+    linkedin-url: ${BRAND_LINKEDIN_URL:https://www.linkedin.com/}
+  qr:
+    secret: ${QR_SIGNING_SECRET:}
+  seed:
+    demo-data: false
+    demo-password: ${DEMO_USER_PASSWORD:}
+    show-days-ahead: 6
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  flyway:
+    locations: classpath:db/migration,classpath:db/demo
+cineverse:
+  jwt:
+    secret: ${JWT_SECRET:dev-only-secret-change-me-dev-only-secret-change-me-0123456789}
+  cookies:
+    secure: ${COOKIE_SECURE:false}
+  payments:
+    mock-enabled: ${PAYMENTS_MOCK_ENABLED:false}
+  qr:
+    secret: ${QR_SIGNING_SECRET:dev-only-qr-secret}
+  seed:
+    demo-data: true
+    demo-password: ${DEMO_USER_PASSWORD:Demo@12345}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+logging:
+  structured:
+    format:
+      console: ecs
