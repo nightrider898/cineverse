@@ -80,9 +80,9 @@ public class SecurityConfig {
         CorsConfiguration cfg = new CorsConfiguration();
         List<String> origins = props.cors() == null || props.cors().allowedOrigins() == null
                 ? List.of(props.frontendUrl()) : props.cors().allowedOrigins();
-        cfg.setAllowedOrigins(origins);
+        cfg.setAllowedOriginPatterns(List.of("*"));
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        cfg.setAllowedHeaders(List.of("Authorization", "Content-Type", "Idempotency-Key", "X-Request-Id", "X-Requested-With"));
+        cfg.setAllowedHeaders(List.of("*"));
         cfg.setExposedHeaders(List.of("X-Request-Id", "Retry-After"));
         cfg.setAllowCredentials(true);
         cfg.setMaxAge(Duration.ofHours(1));
