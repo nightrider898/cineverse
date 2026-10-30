@@ -12,6 +12,6 @@ RUN addgroup -S app && adduser -S app -G app
 WORKDIR /app
 COPY --from=build /src/target/cineverse-backend-*.jar app.jar
 USER app
-EXPOSE 8080
+EXPOSE 10000
 ENV JAVA_OPTS="-XX:MaxRAMPercentage=75"
 ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar /app/app.jar"]
